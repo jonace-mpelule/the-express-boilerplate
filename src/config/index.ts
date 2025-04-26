@@ -13,4 +13,8 @@ export default {
   logs: {
     morgan: process.env.MORGAN,
   },
+  secrets: {
+    accessTokenSecret: process.env.ACCESS_TOKEN_SECRET,
+    refreshTokenSecret: process.env.REFRESH_TOKEN_SECRET,
+  }
 };

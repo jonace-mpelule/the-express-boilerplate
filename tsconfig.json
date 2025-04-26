@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["ES2017", "ESNext.AsyncIterable"],
-    "typeRoots": ["./node_modules/@types", "/src/types"],
+    "lib": [
+      "ES2017",
+      "ESNext.AsyncIterable"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "/src/types"
+    ],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -14,8 +20,43 @@
     "outDir": "./build",
     "allowJs": true,
     "noEmit": false,
-    "esModuleInterop": true
+    "baseUrl": "./src",
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": [
+        "./*"
+      ],
+      "@config/*": [
+        "./config/*"
+      ],
+      "@routes/*": [
+        "./routes/*"
+      ],
+      "@helpers/*": [
+        "./helpers/*"
+      ],
+      "@types/*": [
+        "./types/*"
+      ],
+      "@middleware/*": [
+        "./middleware/*"
+      ],
+      "@loaders/*": [
+        "./loaders/*"
+      ],
+      "@services/*": [
+        "./services/*"
+      ],
+      "@utils/*": [
+        "./utils/*"
+      ],
+    }
   },
-  "include": ["./src/**/*"],
-  "exclude": ["node_modules", "tests"]
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "tests"
+  ]
 }

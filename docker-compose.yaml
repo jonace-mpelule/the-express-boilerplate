@@ -1,4 +1,14 @@
 services:
+  app:
+    build:
+       context: .
+       dockerfile: Dockerfile
+    container_name: "NewContainer"
+    depends_on:
+      - db
+    networks:
+      - my-network
+
   db: 
     image: postgres
     volumes:

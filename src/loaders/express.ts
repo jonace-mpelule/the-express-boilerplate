@@ -6,10 +6,15 @@ import cors from "cors";
 import rateLimit from "express-rate-limit";
 import routes from "../routes";
 import { notFoundHandler, globalErrorHandler } from "../middleware/errors";
+import { setupSwagger } from "./swagger.client";
 
 export default async function ({ app }: { app: Express }) {
   app.get("/status", (req, res) => res.sendStatus(200).end());
   app.head("/status", (req, res) => res.sendStatus(200).end());
+
+
+  // Setting up OpenAPI & Swagger
+  setupSwagger(app)
 
   app.use(
     helmet({
