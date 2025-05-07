@@ -1,15 +1,21 @@
 import express from "express";
 import "reflect-metadata";
-import config from "./config";
+import config from "./config/index.ts";
+import { bLog } from "./utils/better-logger.ts";
 
 async function startServer() {
   const app = express();
 
-  (await import("./loaders")).default({ app });
+  (await import("./loaders/index.ts")).default({ app });
 
   app
-    .listen(config.port, () =>
-      console.log(`🏎💨 APP RUNNING ON PORT ${config.port}`),
+    .listen(config.port, () => {
+      bLog('----------------------------------------')
+      bLog(`SERVER RUNNING ON PORT ${config.port} 🚀`)
+      bLog('----------------------------------------')
+      bLog(`ENV: ${config.env.toUpperCase()}\n`.trim())
+      bLog('----------------------------------------')
+    },
     )
     .on("error", (err: Error) => {
       console.log({ message: err.message });

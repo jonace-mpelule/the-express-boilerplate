@@ -1,14 +1,18 @@
 import dotenv from "dotenv";
 
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
+const environment: string = process.env.NODE_ENV || "production"; // Default to production
 
-const envFile = dotenv.config();
+// Load the appropriate .env file based on NODE_ENV
+const envFile = dotenv.config({
+  path: `.env.${environment}`, // This will use .env.development, .env.production, or .env.test
+});
 
 if (envFile.error) {
-  throw new Error("Please include a .env file");
+  throw new Error("Please include a valid .env file");
 }
 
 export default {
+  env: environment as "production" | "development" | "test",
   port: parseInt(process.env.PORT, 10),
   logs: {
     morgan: process.env.MORGAN,

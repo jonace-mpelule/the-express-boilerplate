@@ -1,12 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { redisClient } from "@loaders/redis.client";
-import config from "../config";
-import { CustomRequest } from "@/types/express.dto";
-import { EXPRESS_STATUS, EXPRESS_MESSAGES } from "@/helpers/constants/express.values";
-import { EXPRESS_FUNCTIONS } from "@/helpers/functions/express.functions";
+import { redisClient } from "@loaders/redis.client.ts";
+import config from "../config/index.ts";
+import { CustomRequest } from "@/types/express.dto.ts";
+import { EXPRESS_STATUS, EXPRESS_MESSAGES } from "@/helpers/constants/express.values.ts";
+import { EXPRESS_FUNCTIONS } from "@/helpers/functions/express.functions.ts";
 
-async function validateJWTToken(
+async function AuthGuard(
   req: CustomRequest,
   res: Response,
   next: NextFunction
@@ -58,4 +58,4 @@ async function validateJWTToken(
   }
 }
 
-export { validateJWTToken as ValidateJWT };
+export { AuthGuard as ValidateJWT };

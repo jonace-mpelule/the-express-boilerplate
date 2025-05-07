@@ -1,7 +1,7 @@
 import { Router, Express } from "express";
 
-import { PostsController } from "./v1/posts/posts.controller";
-import { AuthController } from "./v1/auth/auth.controller";
+
+import { AuthController } from "./v1/auth/auth.controller.ts";
 import { register as RegisterRoutes, type Registration } from "@reflet/express";
 
 export const registeredRoutes: Registration[] = [AuthController]

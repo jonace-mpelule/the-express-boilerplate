@@ -1,12 +1,15 @@
-import { EXPRESS_MESSAGES, EXPRESS_STATUS } from "@/helpers/constants/express.values";
-import { Res } from "@reflet/express";
+import { EXPRESS_MESSAGES, EXPRESS_STATUS } from "@/helpers/constants/express.values.ts";
+import { Res, Req } from "@reflet/express";
+import { totalUnhandledErrors } from "./prometheus.functions.ts";
+import { Logger } from "@/loaders/loki.client.ts";
+import config from "@/config/index.ts";
 
 export class EXPRESS_FUNCTIONS {
-    static async getIP(req: any) {
+    static async getIP(req: Req) {
         return req.headers["x-forwarded-for"] || req.connection.remoteAddress;
     }
 
-    static async getOS(req: any) {
+    static async getOS(req: Req) {
         return req.headers["user-agent"];
     }
 
@@ -29,6 +32,14 @@ export class EXPRESS_FUNCTIONS {
     }
 
     static async unImplementedFailure(res: Res, error: any) {
+        if (config.env == "production") {
+            Logger.error({
+                error
+            })
+            totalUnhandledErrors.inc({
+                route: res.req.url
+            })
+        }
         return res.status(EXPRESS_STATUS.INTERNAL_SERVER_ERROR).send({
             message: EXPRESS_MESSAGES.INTERNAL_SERVER_ERROR,
             error: error,

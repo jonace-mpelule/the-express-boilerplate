@@ -1,5 +1,5 @@
 import { createClient, RedisClientType } from "redis";
-import config from "@config/index";
+import config from "@config/index.ts";
 
 const redisUrl =
   config.env === "production" ? "redis://redis:6379" : "redis://127.0.0.1:6379";

@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { plainToClass } from "class-transformer";
 import { validate, ValidationError } from "class-validator";
 
-export function validateDTO(dtoClass: any) {
+export function ValidationGuard(dtoClass: any) {
   return (req: Request, res: Response, next: NextFunction) => {
     const dtoObject = plainToClass(dtoClass, req.body);
     validate(dtoObject).then((errors: ValidationError[]) => {

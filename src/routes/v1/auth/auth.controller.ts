@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 
-import { AuthService } from "./auth.service";
-import { validateDTO } from "../../../middleware/validate-dto.middleware";
-import { UserDTO } from "../../../types/user.dto";
+import { AuthService } from "./auth.service.ts";
+import { ValidationGuard } from "../../../middleware/validation-guard.middleware.ts";
+import { UserDTO } from "../../../types/user.dto.ts";
 import { Get, Post, Router, Use } from "@reflet/express";
-import { EXPRESS_FUNCTIONS } from "@/helpers/functions/express.functions";
-import { openAPIUnimplementedError } from "@/helpers/constants/openapi.values";
+import { EXPRESS_FUNCTIONS } from "@/helpers/functions/express.functions.ts";
+import { openAPIUnimplementedError } from "@/helpers/constants/openapi.values.ts";
 import { OpenApiRoute } from "openapi-express-decorators";
 
 @Router("/v1/auth")
@@ -16,7 +16,7 @@ export class AuthController {
   }
 
   @Post("/login")
-  @Use(validateDTO(UserDTO))
+  @Use(ValidationGuard(UserDTO))
   @OpenApiRoute('POST', '/v1/auth/login/', {
     summary: "Login User",
     tags: ["User Auth"],

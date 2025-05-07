@@ -2,10 +2,10 @@ import type { Express } from "express"
 import yaml from "js-yaml"
 import swaggerUi from "swagger-ui-express"
 import { generateOpenApiDocs, type OpenApiDocsOptions } from "openapi-express-decorators"
-import { registeredRoutes } from "@/routes"
+import { registeredRoutes } from "@/routes/index.ts"
 import { Req, Res } from "@reflet/express"
 import basicAuth from "express-basic-auth"
-import config from "@/config"
+import config from "@/config/index.ts"
 
 
 const options: OpenApiDocsOptions = {
