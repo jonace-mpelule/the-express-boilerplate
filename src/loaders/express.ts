@@ -4,7 +4,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-import routes from "../routes/index.ts";
+import routes from "@/routes/index.ts";
 import { notFoundHandler, globalErrorHandler } from "../middleware/errors.middleware.ts";
 import { setupSwagger } from "./swagger.client.ts";
 import { registerMetrics } from "./prom.client.ts";
