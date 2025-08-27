@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev:start": "tsup --watch --onSuccess 'npm run dev:run'",
+    "dev:start": "tsdown --watch --onSuccess 'npm run dev:run'",
     "dev:run": "NODE_ENV=development node ./build/bootstrap.cjs",
-    "prod:start": "tsup --watch --onSuccess  'npm run prod:run' ",
+    "prod:start": "tsdown --watch --onSuccess  'npm run prod:run' ",
     "prod:run": "NODE_ENV=production node ./build/bootstrap.cjs",
     "prod": "TS_NODE_BASEURL=./build node -r tsconfig-paths/register /server.js",
     "test": "NODE_ENV=test jest --detectOpenHandles"
@@ -59,7 +59,7 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "tsup": "^8.4.0",
+    "tsdown": "^0.14.2",
     "typescript": "^5.5.4"
   }
 }
