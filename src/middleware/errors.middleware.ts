@@ -1,22 +1,22 @@
-import type { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction } from 'express';
 
 export function notFoundHandler(
-  req: Request,
-  res: Response,
-  next: NextFunction,
+	req: Request,
+	res: Response,
+	next: NextFunction,
 ) {
-  const error = new Error(`PATH ${req.originalUrl} NOT FOUND`);
-  (error as any)["status"] = 404;
-  next(error);
+	const error = new Error(`PATH ${req.originalUrl} NOT FOUND`);
+	(error as any)['status'] = 404;
+	next(error);
 }
 
 export function globalErrorHandler(
-  error: Error,
-  req: Request,
-  res: Response,
-  next: NextFunction,
+	error: Error,
+	req: Request,
+	res: Response,
+	next: NextFunction,
 ) {
-  console.log({ message: error.message });
-  res.status((error as any)["status"] || 500);
-  return res.json({ error: { message: error.message } });
+	console.log({ message: error.message });
+	res.status((error as any)['status'] || 500);
+	return res.json({ error: { message: error.message } });
 }

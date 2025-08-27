@@ -1,1 +1,1 @@
-import('./server.ts')
+import('./server.ts');

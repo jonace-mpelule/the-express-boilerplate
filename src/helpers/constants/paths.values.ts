@@ -1,6 +1,5 @@
-import appRootPath from 'app-root-path'
-import path from 'path'
+import appRootPath from 'app-root-path';
 
 export default class Paths {
-	public static BASE_PATH = appRootPath.path
+	public readonly BASE_PATH = appRootPath.path;
 }

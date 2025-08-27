@@ -1,64 +1,35 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "ESNext.AsyncIterable"
-    ],
-    "typeRoots": [
-      "./node_modules/@types",
-      "/src/types"
-    ],
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "allowImportingTsExtensions": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "moduleResolution": "nodenext",
-    "module": "NodeNext",
-    "pretty": true,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "outDir": "./build",
-    "allowJs": true,
-    "baseUrl": "./src",
-    "esModuleInterop": true,
-    "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@config/*": [
-        "./config/*"
-      ],
-      "@routes/*": [
-        "./routes/*"
-      ],
-      "@helpers/*": [
-        "./helpers/*"
-      ],
-      "@types/*": [
-        "./types/*"
-      ],
-      "@middleware/*": [
-        "./middleware/*"
-      ],
-      "@loaders/*": [
-        "./loaders/*"
-      ],
-      "@services/*": [
-        "./services/*"
-      ],
-      "@utils/*": [
-        "./utils/*"
-      ],
-    }
-  },
-  "include": [
-    "./src/**/*",
-  ],
-  "exclude": [
-    "node_modules",
-    "tests"
-  ],
+	"compilerOptions": {
+		"target": "ES2022",
+		"lib": ["ES2022", "ESNext.AsyncIterable"],
+		"typeRoots": ["./node_modules/@types", "/src/types"],
+		"allowSyntheticDefaultImports": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"allowImportingTsExtensions": true,
+		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
+		"moduleResolution": "nodenext",
+		"module": "NodeNext",
+		"pretty": true,
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"outDir": "./build",
+		"allowJs": true,
+		"baseUrl": "./src",
+		"esModuleInterop": true,
+		"paths": {
+			"@/*": ["./*"],
+			"@config/*": ["./config/*"],
+			"@routes/*": ["./routes/*"],
+			"@helpers/*": ["./helpers/*"],
+			"@types/*": ["./types/*"],
+			"@middleware/*": ["./middleware/*"],
+			"@loaders/*": ["./loaders/*"],
+			"@services/*": ["./services/*"],
+			"@utils/*": ["./utils/*"]
+		}
+	},
+	"include": ["./src/**/*"],
+	"exclude": ["node_modules", "tests"]
 }

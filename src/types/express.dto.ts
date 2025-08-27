@@ -1,5 +1,5 @@
-import { Req } from "@reflet/express"
+import { Req } from '@reflet/express';
 
 export interface CustomRequest extends Req {
-    user?: any;
+	user?: any;
 }

@@ -1,0 +1,8 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.fixAll.biome": "explicit",
+		"source.biome": "explicit",
+		"source.organizeImports.biome": "explicit", 
+        "source.removeUnusedImports": "explicit"
+	}
+}

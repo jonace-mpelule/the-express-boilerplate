@@ -1,5 +1,5 @@
 export class AuthService {
-  async handleLogin(body: {}) {
-    return { ...body };
-  }
+	async handleLogin(body: any) {
+		return { ...body };
+	}
 }
