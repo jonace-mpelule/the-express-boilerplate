@@ -6,7 +6,7 @@ export function notFoundHandler(
   next: NextFunction,
 ) {
   const error = new Error(`PATH ${req.originalUrl} NOT FOUND`);
-  error["status"] = 404;
+  (error as any)["status"] = 404;
   next(error);
 }
 
@@ -17,6 +17,6 @@ export function globalErrorHandler(
   next: NextFunction,
 ) {
   console.log({ message: error.message });
-  res.status(error["status"] || 500);
+  res.status((error as any)["status"] || 500);
   return res.json({ error: { message: error.message } });
 }

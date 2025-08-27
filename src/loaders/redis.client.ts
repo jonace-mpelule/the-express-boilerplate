@@ -1,8 +1,8 @@
 import { createClient, RedisClientType } from "redis";
-import config from "@config/index.ts";
+import env from "@/config/env.ts"
 
 const redisUrl =
-  config.env === "production" ? "redis://redis:6379" : "redis://127.0.0.1:6379";
+  env.ENV === "production" ? "redis://redis:6379" : "redis://127.0.0.1:6379";
 
 let client: RedisClientType;
 
@@ -11,7 +11,7 @@ try {
 
   client.on("error", (err) => console.log("Redis Client Error", err));
 
-  if (config.env !== "test") {
+  if (env.ENV !== "test") {
     client.connect().then(() => console.log("🟥 Redis Client Connected"));
   }
 } catch (error) {

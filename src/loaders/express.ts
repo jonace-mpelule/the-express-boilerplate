@@ -1,5 +1,5 @@
 import express, { type Express, type Request, type Response } from "express";
-import config from "../config/index.ts";
+import env from "@/config/env.ts"
 import helmet from "helmet";
 import morgan from "morgan";
 import cors from "cors";
@@ -20,7 +20,7 @@ export default async function ({ app }: { app: Express }) {
   setupSwagger(app)
 
   // Register prometheus metrics
-  if (config.env == "production") registerMetrics()
+  if (env.ENV == "production") registerMetrics()
 
   app.use(
     helmet({
@@ -45,11 +45,11 @@ export default async function ({ app }: { app: Express }) {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cors());
-  app.use(morgan(config.logs.morgan));
+  app.use(morgan(env.MORGAN));
 
   // LATENCY COLLECTOR
   app.use(responseTime((req: Request, res: Response, time) => {
-    if (req.url !== "/metrics" && config.env == "production") {
+    if (req.url !== "/metrics" && env.ENV == "production") {
       console.log(req.headers['user-agent'])
       totalReqCounter.inc()
       reqResTime.labels({

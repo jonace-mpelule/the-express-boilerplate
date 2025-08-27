@@ -1,10 +1,15 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { redisClient } from "@loaders/redis.client.ts";
-import config from "../config/index.ts";
-import { CustomRequest } from "@/types/express.dto.ts";
+import env from "@/config/env.ts"
+import { Req } from "@reflet/express";
 import { EXPRESS_STATUS, EXPRESS_MESSAGES } from "@/helpers/constants/express.values.ts";
 import { EXPRESS_FUNCTIONS } from "@/helpers/functions/express.functions.ts";
+
+interface CustomRequest<T = any> extends Req {
+    user?: any;
+    parsed?: T
+}
 
 async function AuthGuard(
   req: CustomRequest,
@@ -15,7 +20,7 @@ async function AuthGuard(
     // Retrieve token from cookies or Authorization header
     let token: string | undefined;
     // Assigning token to a cookie accessToken if provided
-    token = req.cookies.accessToken;
+    token = req.cookies?.accessToken ?? null;
 
     if (!token) {
       const authHeader = req.headers["authorization"];
@@ -39,7 +44,7 @@ async function AuthGuard(
     }
 
     // Verify token validity
-    jwt.verify(token, config.secrets.accessTokenSecret!, (err, data: any) => {
+    jwt.verify(token, env.ACCESS_TOKEN_SECRET, (err, data: any) => {
       if (err) {
         return res
           .status(EXPRESS_STATUS.UNAUTHORIZED)
@@ -54,8 +59,8 @@ async function AuthGuard(
   } catch (error) {
     // Catch any unexpected errors
     console.error("Error in token validation middleware:", error);
-    return EXPRESS_FUNCTIONS.unImplementedFailure(error, res);
+    return EXPRESS_FUNCTIONS.unImplementedFailure(res, error);
   }
 }
 
-export { AuthGuard as ValidateJWT };
+export { AuthGuard };

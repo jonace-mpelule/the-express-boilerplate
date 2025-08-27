@@ -5,7 +5,7 @@ import { generateOpenApiDocs, type OpenApiDocsOptions } from "openapi-express-de
 import { registeredRoutes } from "@/routes/index.ts"
 import { Req, Res } from "@reflet/express"
 import basicAuth from "express-basic-auth"
-import config from "@/config/index.ts"
+import env from "@/config/env.ts"
 
 
 const options: OpenApiDocsOptions = {
@@ -16,7 +16,7 @@ const options: OpenApiDocsOptions = {
     },
     servers: [
         {
-            url: `http://127.0.0.1:${config.port}`
+            url: `http://127.0.0.1:${env.PORT}`
         },
         {
             url: "[ADD YOUR DEV SERVER]",
