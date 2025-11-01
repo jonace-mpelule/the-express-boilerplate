@@ -3,7 +3,7 @@ await Bun.build({
     target: 'bun',
     outdir: './dist',
     minify: true, 
-    splitting: true
+    splitting: true,
 })
 
 export {}

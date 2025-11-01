@@ -2,8 +2,9 @@
 
 # The Express Boilerplate
 
-🚀 A production-ready Express.js boilerplate with TypeScript, Prisma, and PostgreSQL
+🚀 A production-ready Express.js boilerplate with Bun, TypeScript, Prisma, and PostgreSQL
 
+[![Bun](https://img.shields.io/badge/Bun-Latest-black.svg)](https://bun.sh/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue.svg)](https://www.typescriptlang.org/)
 [![Express](https://img.shields.io/badge/Express-4.19-green.svg)](https://expressjs.com/)
 [![Prisma](https://img.shields.io/badge/Prisma-5.18-orange.svg)](https://www.prisma.io/)
@@ -15,6 +16,7 @@
 ## ✨ Features
 
 ### 🛠 Core Technologies
+- **[Bun](https://bun.sh/)** - Fast all-in-one JavaScript runtime, bundler, and package manager
 - **[Express.js](https://expressjs.com/)** - Fast, unopinionated, minimalist web framework
 - **[TypeScript](https://www.typescriptlang.org/)** - JavaScript with syntax for types
 - **[Prisma](https://www.prisma.io/)** - Next-generation ORM for Node.js and TypeScript
@@ -36,12 +38,12 @@
 - **[Jest](https://jestjs.io/)** - Delightful JavaScript Testing Framework
 - **[ESLint](https://eslint.org/)** - Pluggable linting utility
 - **[Prettier](https://prettier.io/)** - Opinionated code formatter
-- **[Nodemon](https://nodemon.io/)** - Auto-reload during development
+- **Built-in Watch Mode** - Bun provides native hot-reload during development
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v18 or higher)
+- [Bun](https://bun.sh/) (latest version)
 - PostgreSQL
 - Redis (optional, for caching)
 
@@ -55,7 +57,7 @@ cd the-express-boilerplate
 
 2. Install dependencies:
 ```bash
-npm install
+bun install
 ```
 
 3. Set up environment variables:
@@ -65,7 +67,7 @@ cp .env.development .env
 
 4. Start the development server:
 ```bash
-npm run dev:start
+bun run dev:start
 ```
 
 ## 📁 Project Structure
@@ -90,10 +92,10 @@ npm run dev:start
 
 ### Available Scripts
 
-- `npm run dev:start` - Start the development server with hot-reload
-- `npm run build` - Build the project
-- `npm run prod:start` - Start the production server
-- `npm test` - Run tests
+- `bun dev:start` - Start the development server with hot-reload
+- `bun run build` - Build the project
+- `bun prod:start` - Start the production server
+- `bun test` - Run tests
 
 ## 🔒 Environment Variables
 
@@ -101,17 +103,15 @@ Create a `.env` file in the root directory:
 
 ```env
 # Server
-PORT=3000
-NODE_ENV=development
+ENVIRONMENT=production
+PORT=2102
+MORGAN='dev'
+NODE_OPTIONS=--no-warnings
 
-# Database
-DATABASE_URL="postgresql://user:password@localhost:5432/dbname"
+ACCESS_TOKEN_SECRET = "accessTokenSecret"
+REFRESH_TOKEN_SECRET = "refreshTokenSecret"
 
-# JWT
-JWT_SECRET=your-secret-key
-
-# Redis
-REDIS_URL="redis://localhost:6379"
+DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
 ```
 
 ## 🐳 Docker Support
@@ -135,7 +135,7 @@ This boilerplate includes:
 Run tests with Jest:
 
 ```bash
-npm test
+bun test
 ```
 
 Test files are located in `src/__tests__/`
