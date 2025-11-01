@@ -3,5 +3,4 @@ export class CreateCountryDTO {
     flag!: string;
     code!: string;
     shortCode!: string;
-
-}
+} 
