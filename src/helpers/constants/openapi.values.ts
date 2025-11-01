@@ -1,4 +1,7 @@
-import { OpenApiRouteOptions, Parameter } from 'openapi-express-decorators';
+import type {
+	OpenApiRouteOptions,
+	Parameter,
+} from 'openapi-express-decorators';
 
 export const AuthParam: Parameter = {
 	name: 'Authorization',

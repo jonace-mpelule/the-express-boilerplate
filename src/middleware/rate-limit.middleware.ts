@@ -1,7 +1,8 @@
-import { EXPRESS_STATUS } from '@/helpers/constants/express.values.ts';
-import { EXPRESS_FUNCTIONS } from '@/helpers/functions/express.functions.ts';
-import { Next, Req, Res } from '@reflet/express';
+import type { Next, Req, Res } from '@reflet/express';
 import rateLimit from 'express-rate-limit';
+import { EXPRESS_STATUS } from '@/helpers/constants/express.values.ts';
+import { ResFN } from '@/utils/response.utils.ts';
+
 
 type RateLimitProps = {
 	maxRequests?: number;
@@ -27,7 +28,7 @@ export function RateLimitGuard({
 		try {
 			return limiter(req, res, next);
 		} catch (err) {
-			return EXPRESS_FUNCTIONS.unImplementedFailure(res, err);
+			return ResFN.internalServerError(res, err);
 		}
 	};
 }

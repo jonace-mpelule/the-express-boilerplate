@@ -1,35 +1,54 @@
 {
 	"compilerOptions": {
-		"target": "ES2022",
-		"lib": ["ES2022", "ESNext.AsyncIterable"],
-		"typeRoots": ["./node_modules/@types", "/src/types"],
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true,
-		"allowImportingTsExtensions": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
+
+		// Environment setup & latest features
+		"lib": ["ESNext"],
+		"target": "ESNext",
 		"moduleResolution": "nodenext",
 		"module": "NodeNext",
-		"pretty": true,
-		"sourceMap": true,
-		"skipLibCheck": true,
-		"outDir": "./build",
+		"moduleDetection": "force",
 		"allowJs": true,
-		"baseUrl": "./src",
-		"esModuleInterop": true,
+		
+		// Bundler mode
+		"allowImportingTsExtensions": true,
+		"verbatimModuleSyntax": true,
+		"noEmit": true,
+		"baseUrl": "./",
+
+		"sourceMap": true,
+
+		"outDir": "./build",
+
+
+		// Best practices
+		"strict": true,
+		"skipLibCheck": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"forceConsistentCasingInFileNames": true,
+		
+		
+		// Some stricter flags (disabled by default)
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"noPropertyAccessFromIndexSignature": false,
+	  
 		"paths": {
-			"@/*": ["./*"],
-			"@config/*": ["./config/*"],
-			"@routes/*": ["./routes/*"],
-			"@helpers/*": ["./helpers/*"],
-			"@types/*": ["./types/*"],
-			"@middleware/*": ["./middleware/*"],
-			"@loaders/*": ["./loaders/*"],
-			"@services/*": ["./services/*"],
-			"@utils/*": ["./utils/*"]
+			"@/*": ["./src/*"],
+			"@config/*": ["./src/config/*"],
+			"@routes/*": ["./src/routes/*"],
+			"@helpers/*": ["./src/helpers/*"],
+			"@types/*": ["./src/types/*"],
+			"@middleware/*": ["./src/middleware/*"],
+			"@loaders/*": ["./src/loaders/*"],
+			"@services/*": ["./src/services/*"],
+			"@utils/*": ["./src/utils/*"]
 		}
 	},
 	"include": ["./src/**/*"],
 	"exclude": ["node_modules", "tests"]
 }
+

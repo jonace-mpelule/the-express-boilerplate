@@ -8,6 +8,7 @@ export default defineConfig({
 	sourcemap: true,
 	minify: true,
 	target: 'es2022',
+	 
 	outDir: 'build',
 	external: ['@prisma/client'],
 	ignoreWatch: [''],

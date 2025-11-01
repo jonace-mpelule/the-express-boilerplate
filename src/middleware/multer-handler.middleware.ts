@@ -1,7 +1,6 @@
 import type { Next, Req, Res } from '@reflet/express';
 import multer from 'multer';
-import { EXPRESS_FUNCTIONS } from '@/helpers/functions/express.functions.ts';
-
+import { ResFN } from '@/utils/response.utils.ts';
 
 export function MulterHandler(
 	upload: multer.Multer,
@@ -11,15 +10,14 @@ export function MulterHandler(
 		try {
 			upload.single('file')(req, res, (err: multer.MulterError | unknown) => {
 				if (!req.file) {
-
-					return EXPRESS_FUNCTIONS.badRequestFailure(res, {
+					return ResFN.badRequest(res, {
 						message: 'No file uploaded',
 						code: 'no-file-uploaded',
 					});
 				}
 
 				if (!allowFormats.includes(req.file.mimetype)) {
-					return EXPRESS_FUNCTIONS.badRequestFailure(res, {
+					return ResFN.badRequest(res, {
 						message: `File format not allowed. Allowed formats: ${allowFormats.join(', ')}`,
 						code: 'invalid-format',
 					});
@@ -35,7 +33,7 @@ export function MulterHandler(
 				next();
 			});
 		} catch (err) {
-			return EXPRESS_FUNCTIONS.unImplementedFailure(res, err);
+			return ResFN.internalServerError(res, err);
 		}
 	};
 }

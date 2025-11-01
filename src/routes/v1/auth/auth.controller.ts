@@ -1,12 +1,7 @@
-import { Request, Response } from 'express';
-
+import { Post, type Req, type Res, Router, Use } from '@reflet/express';
+import CAuthClient from '@/loaders/cauth.client.ts';
+import { AcceptsHeaderGuard } from '@/middleware/accept-header-guard.middleware.ts';
 import { AuthService } from './auth.service.ts';
-import { ValidationGuard } from '../../../middleware/validation-guard.middleware.ts';
-import { UserDTO } from '../../../types/user.dto.ts';
-import { Get, Post, Router, Use } from '@reflet/express';
-import { EXPRESS_FUNCTIONS } from '@/helpers/functions/express.functions.ts';
-import { openAPIUnimplementedError } from '@/helpers/constants/openapi.values.ts';
-import { OpenApiRoute } from 'openapi-express-decorators';
 
 @Router('/v1/auth')
 export class AuthController {
@@ -15,53 +10,27 @@ export class AuthController {
 		this.authService = new AuthService();
 	}
 
-	@Post('/login')
-	@Use(ValidationGuard(UserDTO))
-	@OpenApiRoute('POST', '/v1/auth/login/', {
-		summary: 'Login User',
-		tags: ['User Auth'],
-		parameters: [
-			// AuthParam,
-		],
-		requestBody: {
-			content: {
-				'application/json': {
-					example: {
-						email: 'me@mail.com',
-						password: 'password',
-					},
-				},
-			},
-		},
-		responses: {
-			200: {
-				description: 'Login Successful',
-				content: {
-					'application/json': {
-						example: {
-							message: 'Login Successful',
-							code: 'success',
-							data: {
-								id: 'd2855c90-f0c0-4d4c-aa6f-273a8ed1e51e',
-								tokens: {
-									accessToken: '',
-									refreshToken: '',
-								},
-							},
-						},
-					},
-				},
-			},
+	@Post('/register')
+	@Use(AcceptsHeaderGuard(['application/json']))
+	register = (req: Req, res: Res) => CAuthClient.Routes.Register()(req, res)
 
-			...openAPIUnimplementedError,
-		},
-	})
-	async login(req: Request, res: Response) {
-		try {
-			var response = await this.authService.handleLogin(req.body);
-			res.status(200).send({ ...response });
-		} catch (err) {
-			return EXPRESS_FUNCTIONS.unImplementedFailure(res, {});
-		}
-	}
+
+	@Post('/login')
+	@Use(AcceptsHeaderGuard(['application/json']))
+	login = (req: Req, res: Res) => CAuthClient.Routes.Login()(req, res)
+
+	@Post('/logout')
+	@Use(AcceptsHeaderGuard(['application/json']))
+	logout = (req: Req, res: Res) => CAuthClient.Routes.Logout()(req, res)
+
+	@Post('/refresh')
+	@Use(CAuthClient.Guard())
+	@Use(AcceptsHeaderGuard(['application/json']))
+	refresh = (req: Req, res: Res) => CAuthClient.Routes.Refresh()(req, res);
+ 
+	@Post('/change-password')
+	@Use(CAuthClient.Guard())
+	@Use(AcceptsHeaderGuard(['application/json']))
+	changePassword = (req: Req, res: Res) =>
+		CAuthClient.Routes.ChangePassword(String(req.cauth?.id))(req, res);
 }

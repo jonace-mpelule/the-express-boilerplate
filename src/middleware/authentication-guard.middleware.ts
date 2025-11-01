@@ -4,7 +4,8 @@ import type { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import env from '@/config/env.ts';
 import { EXPRESS_STATUS } from '@/helpers/constants/express.values.ts';
-import { EXPRESS_FUNCTIONS } from '@/helpers/functions/express.functions.ts';
+import { ResFN } from '@/utils/response.utils.ts';
+
 
 interface CustomRequest<T = any> extends Req {
 	user?: any;
@@ -60,7 +61,7 @@ async function AuthGuard(
 	} catch (error) {
 		// Catch any unexpected errors
 		console.error('Error in token validation middleware:', error);
-		return EXPRESS_FUNCTIONS.unImplementedFailure(res, error);
+		return ResFN.internalServerError(res, error);
 	}
 }
 

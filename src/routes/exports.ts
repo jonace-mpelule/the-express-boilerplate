@@ -1,2 +1,3 @@
 import { AuthController } from './v1/auth/auth.controller.ts';
-export default [AuthController];
+import { countriesController } from './v1/countries/countries.controller.ts';
+export default [AuthController, countriesController];

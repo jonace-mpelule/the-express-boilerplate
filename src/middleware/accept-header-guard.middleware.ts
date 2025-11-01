@@ -1,5 +1,5 @@
-import { Next, Req, Res } from '@reflet/express';
-import { EXPRESS_FUNCTIONS } from '@/helpers/functions/express.functions.ts';
+import type { Next, Req, Res } from '@reflet/express';
+import { ResFN } from '@/utils/response.utils.ts';
 
 type ContentTypes =
 	| 'application/json'
@@ -20,18 +20,18 @@ export function AcceptsHeaderGuard(allowedTypes: Array<ContentTypes>) {
 			const rawType = req.headers['content-type'];
 
 			if (!rawType) {
-				return EXPRESS_FUNCTIONS.notAcceptableFailure(res);
+				return ResFN.notAcceptable(res);
 			}
 
 			const [type] = rawType.split(';').map((s) => s.trim().toLowerCase());
 
 			if (!allowedTypes.includes(type as ContentTypes)) {
-				return EXPRESS_FUNCTIONS.notAcceptableFailure(res);
+				return ResFN.notAcceptable(res);
 			}
 
 			next();
 		} catch (err) {
-			return EXPRESS_FUNCTIONS.unImplementedFailure(res, err);
+			return ResFN.internalServerError(res, err);
 		}
 	};
 }

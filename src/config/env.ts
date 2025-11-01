@@ -1,11 +1,4 @@
-import dotenv from 'dotenv';
 import z from 'zod';
-
-// const environment: string = process.env.NODE_ENV || 'production'; // Default to production
-
-const envFile = dotenv.config({
-	path: `.env`,
-});
 
 const envSchema = z.object({
 	PORT: z.coerce.number().min(1000),
@@ -21,7 +14,8 @@ const envSchema = z.object({
 		.default('development'),
 });
 
-const parse = envSchema.safeParse(envFile.parsed ?? {});
+
+const parse = envSchema.safeParse(Bun.env ?? {});
 
 if (!parse.success) {
 	console.error(

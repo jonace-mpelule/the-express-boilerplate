@@ -1,6 +1,5 @@
-import { EXPRESS_FUNCTIONS } from '@/helpers/functions/express.functions.ts';
-
-import { Next, Req, Res } from '@reflet/express';
+import type { Next, Req, Res } from '@reflet/express';
+import { ResFN } from '@/utils/response.utils.ts';
 
 interface CustomRequest<T = any> extends Req {
 	user?: any;
@@ -20,7 +19,7 @@ export function CustomParseHeader(headers: Array<string>) {
 			req.parsed = saved;
 			next();
 		} catch (err) {
-			return EXPRESS_FUNCTIONS.unImplementedFailure(res, err);
+			return ResFN.internalServerError(res, err);
 		}
 	};
 }

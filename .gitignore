@@ -1,7 +1,51 @@
-# misc
-.DS_Store
-#.env**
-
-#.env
 node_modules
+bower_components
+dist
+DS_Store
 build
+
+build/
+Node.js
+node_modules/
+dist/
+.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env/
+venv/
+ENV/
+*.egg-info/
+*.egg
+pip-log.txt
+
+# OS/System
+.DS_Store
+Thumbs.db
+
+# VS Code
+# .vscode/
+
+# Audio Fingerprinting DB or temp files
+*.wav
+*.mp3
+*.db
+*.sqlite
+tmp/
+./build/
+
+# Python virtual env inside project
+# fingerprint-generator/venv/
+
+# Optional: If you're using docker
+docker-compose.override.yml
+*.pid
+/src/generated/prisma
